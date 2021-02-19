@@ -9,13 +9,13 @@ public class ShoppingCart {
 	private static HashMap<Integer, Product> productList = ShoppingCard
 			.toHashMap();
 
-	public  boolean addItemToCart(int choice) {
+	public  boolean addItemToCart(int choice, int quantity) {
 		if (choice >= 1 && choice <= 5) {
 			Product product = productList.get(choice);
-			if (product.getQuantity() > 0) {
+			if (product.getQuantity() >= quantity) {
 				currentCart.put(product,
-						currentCart.getOrDefault(product, 0) + 1);
-				product.setQuantity(product.getQuantity() - 1);
+						currentCart.getOrDefault(product, 0) + quantity);
+				product.setQuantity(product.getQuantity() - quantity);
 			} else
 				return false;
 			return true;
@@ -23,19 +23,19 @@ public class ShoppingCart {
 		return false;
 	}
 
-	 public boolean deleteItemFromCart(int choice){
+	 public boolean deleteItemFromCart(int choice, int quantity){
 		 if (currentCart.size() == 0){
 				System.out.println("Shopping Cart is Empty!");
 				return false;
 		 }
 		 else{
 			 Product product = productList.get(choice);
-			 if(currentCart.get(product)==1)
+			 if(currentCart.get(product)==quantity)
 				 currentCart.remove(product);
 			 else
-				 currentCart.put(product, currentCart.get(product)-1);
-			 int quantity = product.getQuantity();
-			 product.setQuantity(quantity+1);
+				 currentCart.put(product, currentCart.get(product)-quantity);
+			 int quan = product.getQuantity();
+			 product.setQuantity(quan+quantity);
 			 return true;
 		 }
 	 }
@@ -102,7 +102,7 @@ public class ShoppingCart {
 			System.out.println("Enter Your Choice: ");
 			Scanner scanner = new Scanner(System.in);
 			int choice = scanner.nextInt();
-			int ch;
+			int ch, quantity;
 			switch (choice) {
 			case 1:
 				shoppingCart.displayAvailableItems();
@@ -112,7 +112,9 @@ public class ShoppingCart {
 				shoppingCart.displayAvailableItems();
 				System.out.println("Enter product number to add: ");
 				ch = scanner.nextInt();
-				shoppingCart.addItemToCart(ch);
+				System.out.println("Enter quantity to add: ");
+				quantity = scanner.nextInt();
+				shoppingCart.addItemToCart(ch, quantity);
 				break;
 
 			case 3:
@@ -120,7 +122,9 @@ public class ShoppingCart {
 				shoppingCart.displayCart();
 				System.out.println("Enter product number to remove: ");
 				ch = scanner.nextInt();
-				shoppingCart.deleteItemFromCart(ch);
+				System.out.println("Enter quantity to delete: ");
+				quantity = scanner.nextInt();
+				shoppingCart.deleteItemFromCart(ch, quantity);
 				break;
 
 			case 4:
