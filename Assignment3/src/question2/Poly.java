@@ -72,6 +72,9 @@ public final class Poly {
 		return new Poly(mul.length, mul);
 	}
 
+	/**
+	 * To display the coffiecients of the polynomial
+	 */
 	public String toString(){
 		String result="";
 		for(int i=0;i<=this.degree();i++)
