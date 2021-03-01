@@ -1,112 +1,80 @@
 package question2;
 
-import java.util.Arrays;
-import java.util.Comparator;
-
+//FCFS Job Scheduling algorithm, assuming arrivalBurstTime array containing processes 
+//in sorted order of their arrival time 
 public class FcfsJobScheduling {
-	/**
-	 * Sorting 2D array on basis of arrival time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
-	 */
-	public static void sort(int atbt[][]) {
-		Comparator<int[]> co = new Comparator<int[]>() {
-			@Override
-			public int compare(int[] a, int[] b) {
-
-				return a[0] - b[0];
-			}
-		};
-		Arrays.sort(atbt, co);
-	}
+	private int arrivalTimeIndex = 0;
+	private int burstTimeIndex = 1;
+	
 	/**
 	 * Calculating the completion time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
+	 * @param arrivalBurstTime 2D array 
 	 * @return the completion time array for each i process
 	 */
-	public static int[] calculateCompletionTime(int atbt[][]) {
-		int ct[] = new int[atbt.length];
-		ct[0] = atbt[0][0] + atbt[0][1];
-		for (int i = 1; i < ct.length; i++) {
-			int currentAT = atbt[i][0];
-			int currentBT = atbt[i][1];
-			if (currentAT > ct[i - 1])
-				ct[i] = currentAT + currentBT;
+	public int[] calculateCompletionTime(int arrivalBurstTime[][], int numberOfProcess) {
+		int completionTime[] = new int[numberOfProcess];
+		
+		//Calculating completion time for first process
+		completionTime[0] = arrivalBurstTime[0][arrivalTimeIndex] + arrivalBurstTime[0][burstTimeIndex];
+		
+		for (int index = 1; index < completionTime.length; index++) {
+			int currentArrivalTime = arrivalBurstTime[index][arrivalTimeIndex];
+			int currentBurstTime = arrivalBurstTime[index][burstTimeIndex];
+			if (currentArrivalTime > completionTime[index - 1])
+				completionTime[index] = currentArrivalTime + currentBurstTime;
 			else
-				ct[i] = ct[i - 1] + currentBT;
+				completionTime[index] = completionTime[index - 1] + currentBurstTime;
 		}
-		return ct;
+		return completionTime;
 	}
 	/**
 	 * Calculating Turn around time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
+	 * @param arrivalBurstTime 2D array 
 	 * @return the turn around time array for each i process
 	 */
-	public static int[] calculateTurnAroundTime(int atbt[][]) {
-		int ct[] = calculateCompletionTime(atbt);
-		int tat[] = new int[atbt.length];
-		for (int i = 0; i < tat.length; i++) {
-			tat[i] = ct[i] - atbt[i][0];
+	public int[] calculateTurnAroundTime(int arrivalBurstTime[][], int numberOfProcess) {
+		int completionTime[] = calculateCompletionTime(arrivalBurstTime, numberOfProcess);
+		int turnAroundTime[] = new int[numberOfProcess];
+		for (int index = 0; index < turnAroundTime.length; index++) {
+			turnAroundTime[index] = completionTime[index] - arrivalBurstTime[index][arrivalTimeIndex];
 		}
-		return tat;
+		return turnAroundTime;
 	}
 	/**
 	 * Calculating waiting time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
+	 * @param arrivalBurstTime 2D array 
 	 * @return the waiting time array for each i process
 	 */
-	public static int[] calculateWaitingTime(int atbt[][]) {
-		int tat[] = calculateTurnAroundTime(atbt);
-		int wt[] = new int[atbt.length];
-		for (int i = 0; i < wt.length; i++)
-			wt[i] = tat[i] - atbt[i][1];
-		return wt;
+	public int[] calculateWaitingTime(int arrivalBurstTime[][], int numberOfProcess) {
+		int turnAroundTime[] = calculateTurnAroundTime(arrivalBurstTime, numberOfProcess);
+		int waitingTime[] = new int[numberOfProcess];
+		for (int index = 0; index < waitingTime.length; index++)
+			waitingTime[index] = turnAroundTime[index] - arrivalBurstTime[index][burstTimeIndex];
+		return waitingTime;
 	}
 	/**
 	 * Calculating average waiting time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
+	 * @param arrivalBurstTime 2D array 
 	 * @return average waiting time
 	 */
-	public static double calculateAverageWaitingTime(int atbt[][]) {
-		int wt[] = calculateWaitingTime(atbt);
-		int total = 0;
-		for (int i : wt)
-			total += i;
-		return (double) total / wt.length;
+	public double calculateAverageWaitingTime(int arrivalBurstTime[][], int numberOfProcess) {
+		int waitingTime[] = calculateWaitingTime(arrivalBurstTime, numberOfProcess);
+		int totalWaitingTime = 0;
+		for (int currentWaitingTime : waitingTime)
+			totalWaitingTime += currentWaitingTime;
+		return (double) totalWaitingTime / waitingTime.length;
 	}
 	/**
 	 * Calculating maximum waiting time
-	 * @param atbt 2D array having arrival time at 0 index and burst time at index 1.
+	 * @param arrivalBurstTime 2D array 
 	 * @return maximum waiting time
 	 */
-	public static int maxWaitingTime(int atbt[][]) {
-		int wt[] = calculateWaitingTime(atbt);
-		int max = Integer.MIN_VALUE;
-		for (int i : wt)
-			max = Math.max(max, i);
-		return max;
+	public int maxWaitingTime(int arrivalBurstTime[][], int numberOfProcess) {
+		int waitingTime[] = calculateWaitingTime(arrivalBurstTime, numberOfProcess);
+		int maximumWaitingTime = Integer.MIN_VALUE;
+		for (int currentWaitingTime : waitingTime)
+			maximumWaitingTime = Math.max(maximumWaitingTime, currentWaitingTime);
+		return maximumWaitingTime;
 	}
 	
-	
-	//For testing 
-	public static void main(String[] args) {
-		int atbt[][] = { { 0, 10 }, { 60, 10 }, { 6, 20 }, { 110, 5 } };
-		sort(atbt);
-		int ct[] = calculateCompletionTime(atbt);
-		System.out.println("Completion Time: ");
-		for (int i : ct)
-			System.out.println(i);
-
-		int tat[] = calculateTurnAroundTime(atbt);
-		System.out.println("Turn Around Time: ");
-		for (int i : tat)
-			System.out.println(i);
-		
-		System.out.println("Waiting Time: ");
-		int wt[] = calculateWaitingTime(atbt);
-		
-		for(int i: wt)
-			System.out.println(i);
-		System.out.println("Average Waiting Time: " + calculateAverageWaitingTime(atbt));
-		System.out.println("Maximum waiting time: " + maxWaitingTime(atbt));
-	}
 }

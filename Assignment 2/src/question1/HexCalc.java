@@ -1,14 +1,37 @@
 package question1;
 
-
+//HexCalc class will be working with only positive integers
 public class HexCalc {
+	private int baseValue = 16; //base value of hexadecimal number
+	
 	/**
-	 * Coverting hexadecimal string to decimal string
+	 * Converting hexadecimal string to decimal string
 	 * @param hex is hexadecimal number in string
 	 * @return decimal conversion of hex in string
 	 */
-	public static String hexaToDecimal(String hex) {
-		return Integer.parseInt(hex, 16) + "";
+	public  String hexadecimalToDecimal(String hexadecimalString) {
+		int baseMultiply = 1;
+		int decimalNumber = 0;
+		for(int index = hexadecimalString.length()-1;index>=0;index--){
+			char currentHexadecimalCharacter = hexadecimalString.charAt(index);
+			if(currentHexadecimalCharacter>='1' && currentHexadecimalCharacter<='9'){
+				int currentHexadecimalNumber = Integer.parseInt(currentHexadecimalCharacter+"");
+				decimalNumber += currentHexadecimalNumber * baseMultiply;
+				baseMultiply*=baseValue;
+			}
+			else if(currentHexadecimalCharacter>='A' && currentHexadecimalCharacter<='F'){
+				int currentHexadecimalNumber = Integer.parseInt((currentHexadecimalCharacter-55)+"");
+				decimalNumber += currentHexadecimalNumber * baseMultiply;
+				baseMultiply*=baseValue;
+			}
+			else if(currentHexadecimalCharacter>='a' && currentHexadecimalCharacter<='f'){
+				int currentHexadecimalNumber = Integer.parseInt((currentHexadecimalCharacter-87)+"");
+				decimalNumber += currentHexadecimalNumber * baseMultiply;
+				baseMultiply*=baseValue;
+			}
+		}
+		String decimalRepresentation = String.valueOf(decimalNumber);
+		return decimalRepresentation;
 	}
 
 	/**
@@ -16,107 +39,112 @@ public class HexCalc {
 	 * @param decimal is decimal number in string
 	 * @return hexadecimal conversion of decimal in string
 	 */
-	public static String decimalToHexa(String decimal) {
-		return Integer.toHexString(Integer.parseInt(decimal));
+	public  String decimalToHexadecimal(String decimal) {
+		int decimalNumber = Integer.parseInt(decimal);
+		char hexadecimalCharacters[] = {'0','1','2','3','4', '5','6','7','8','9','A'
+										,'B','C','D','E','F'};
+		String hexadecimalNumber = "";
+		while(decimalNumber>0){
+			int remainder = decimalNumber % baseValue;
+			hexadecimalNumber = hexadecimalCharacters[remainder] + hexadecimalNumber;
+			decimalNumber /= baseValue;
+		}
+		return hexadecimalNumber;
 	}
 
 	/**
 	 * Adding two hexadecimal number
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return sum of num1 and num2 in string
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return sum of firstHexadecimal and secondHexadecimal in string
 	 */
-	public static String add(String num1, String num2) {
-		int num1Dec = Integer.parseInt(hexaToDecimal(num1));
-		int num2Dec = Integer.parseInt(hexaToDecimal(num2));
-		String result = decimalToHexa(String.valueOf(num1Dec + num2Dec));
-		return result;
+	public  String add(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		String addition = decimalToHexadecimal(String.valueOf(firstHexadecimalDec + secondHexadecimalDec));
+		return addition;
 
 	}
 	/**
 	 * Subtracting two hexadecimal number
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return subtraction of num1 and num2 in string
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return subtraction of firstHexadecimal and secondHexadecimal in string
 	 */
-	public static String subtract(String num1, String num2) {
-		int num1Dec = Integer.parseInt(hexaToDecimal(num1));
-		int num2Dec = Integer.parseInt(hexaToDecimal(num2));
-		String result = decimalToHexa(String.valueOf(num1Dec - num2Dec));
-		return result;
+	public  String subtract(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		String subtraction = decimalToHexadecimal(String.valueOf(firstHexadecimalDec - secondHexadecimalDec));
+		if(subtraction.equals(""))
+			subtraction+="0";
+		return subtraction;
 	}
 	/**
 	 * Multiply two hexadecimal number
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return multiplication of num1 and num2 in string
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return multiplication of firstHexadecimal and secondHexadecimal in string
 	 */
-	public static String multiply(String num1, String num2) {
-		int num1Dec = Integer.parseInt(hexaToDecimal(num1));
-		int num2Dec = Integer.parseInt(hexaToDecimal(num2));
-		String result = decimalToHexa(String.valueOf(num1Dec * num2Dec));
-		return result;
+	public  String multiply(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		String multiplication = decimalToHexadecimal(String.valueOf(firstHexadecimalDec * secondHexadecimalDec));
+		return multiplication;
 	}
 	/**
 	 * Dividing two hexadecimal number
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return division of num1 and num2 in string
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return division of firstHexadecimal and secondHexadecimal in string
 	 */
-	public static String divide(String num1, String num2) {
-		int num1Dec = Integer.parseInt(hexaToDecimal(num1));
-		int num2Dec = Integer.parseInt(hexaToDecimal(num2));
-		String result = decimalToHexa(String.valueOf(num1Dec / num2Dec));
-		return result;
+	public  String divide(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		String division = decimalToHexadecimal(String.valueOf(firstHexadecimalDec / secondHexadecimalDec));
+		return division;
 	}
 
 	/**
-	 * Comparing num1==num2
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return boolean value checking whether num1==num2
+	 * Comparing firstHexadecimal==secondHexadecimal
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return boolean value checking whether firstHexadecimal==secondHexadecimal
 	 */
-	public static boolean isEquals(String num1, String num2) {
-		if (num1.equals(num2))
-			return true;
-		return false;
+	public  boolean isEquals(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		boolean flag = false;
+		if (firstHexadecimalDec==secondHexadecimalDec)
+			flag = true;
+		return flag;
 	}
 	/**
-	 * Comparing num1>num2
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return boolean value checking whether num1>num2
+	 * Comparing firstHexadecimal>secondHexadecimal
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return boolean value checking whether firstHexadecimal>secondHexadecimal
 	 */
-	public static boolean isGreaterThan(String num1, String num2) {
-		if (num1.compareTo(num2) > 0)
-			return true;
-		return false;
+	public  boolean isGreaterThan(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		boolean flag = false;
+		if (firstHexadecimalDec>secondHexadecimalDec)
+			flag = true;
+		return flag;
 	}
 	/**
-	 * Comparing num1<num2
-	 * @param num1 is first hexadecimal string
-	 * @param num2 is second hexadecimal string
-	 * @return boolean value checking whether num1<num2
+	 * Comparing firstHexadecimal<secondHexadecimal
+	 * @param firstHexadecimal is first hexadecimal string
+	 * @param secondHexadecimal is second hexadecimal string
+	 * @return boolean value checking whether firstHexadecimal<secondHexadecimal
 	 */
-	public static boolean isLessThan(String num1, String num2) {
-		if (num1.compareTo(num2) < 0)
-			return true;
-		return false;
+	public  boolean isLessThan(String firstHexadecimal, String secondHexadecimal) {
+		int firstHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(firstHexadecimal));
+		int secondHexadecimalDec = Integer.parseInt(hexadecimalToDecimal(secondHexadecimal));
+		boolean flag = false;
+		if (firstHexadecimalDec<secondHexadecimalDec)
+			flag = true;
+		return flag;
 	}
 	
-	//For testing purpose
-	public static void main(String[] args) {
-		String num1 = "8ab";
-		String num2 = "b78";
-		System.out.println("Addition: " + add(num1, num2));
-		System.out.println("Subtration: " + subtract(num1, num2));
-		System.out.println("Multiply: " + multiply(num1, num2));
-		System.out.println("Division: " + divide(num1, num2));
-		System.out.println("num1 equals to num2: " + isEquals(num1, num2));
-		System.out
-				.println("num1 greater than num2: " + isGreaterThan(num1, num2));
-		System.out.println("num1 less than num2: " + isLessThan(num1, num2));
-
-	}
-
 }
