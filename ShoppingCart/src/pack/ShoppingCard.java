@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 // ShoppingCard class to store predefined current item available in the shop
 class ShoppingCard {
-	private static Product biscuit = new Product( "Biscuit", 90, 20);
-	private static Product sanitizer = new Product( "Sanitizer", 120, 50);
-	private static Product vaseline = new Product( "Vaseline", 50, 5);
-	private static Product pepsi = new Product( "Pepsi", 45, 35);
-	private static Product chips = new Product( "Chips", 25, 10);
+	private static Product biscuit = new Product(1, "Biscuit", 90, 20);
+	private static Product sanitizer = new Product(2, "Sanitizer", 120, 50);
+	private static Product vaseline = new Product(3, "Vaseline", 50, 5);
+	private static Product pepsi = new Product(4, "Pepsi", 45, 35);
+	private static Product chips = new Product(5, "Chips", 25, 10);
 
 	/**
 	 * Putting the products into hashmap 
@@ -16,11 +16,11 @@ class ShoppingCard {
 	 */
 	public static HashMap<Integer, Product> toHashMap() {
 		HashMap<Integer, Product> productList = new HashMap<>();
-		productList.put(1, biscuit);
-		productList.put(2, sanitizer);
-		productList.put(3, vaseline);
-		productList.put(4, pepsi);
-		productList.put(5, chips);
+		productList.put(biscuit.getProductID(), biscuit);
+		productList.put(sanitizer.getProductID(), sanitizer);
+		productList.put(vaseline.getProductID(), vaseline);
+		productList.put(pepsi.getProductID(), pepsi);
+		productList.put(chips.getProductID(), chips);
 		return productList;
 	}
 
