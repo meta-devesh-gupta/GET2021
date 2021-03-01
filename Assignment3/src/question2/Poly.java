@@ -1,31 +1,35 @@
 package question2;
 
+//Immutable Class Poly to make a polynomial performing basic methods
+// evaluate, add and multiply.
 public final class Poly {
-	private final int polyCofficients[];
+	
+	// an array to represent single variable polynomial
+	private final int polynomialCofficients[];
 	
 	/**
-	 * Initializing polyCOfficients
+	 * Initializing polynomialCofficients
 	 * @param degree of the polynomials
-	 * @param polyCofficients
+	 * @param polynomialCofficients
 	 */
-	public Poly(int degree, int[] polyCofficients) {
-		this.polyCofficients = new int[degree];
-		for(int i=0;i<polyCofficients.length;i++)
-			this.polyCofficients[i]=polyCofficients[i];
+	public Poly(int[] polynomialCofficients) {
+		this.polynomialCofficients = new int[polynomialCofficients.length];
+		for(int index=0;index<polynomialCofficients.length;index++)
+			this.polynomialCofficients[index]=polynomialCofficients[index];
 	}
 
 	/**
 	 * Evaluating the polynomial for given variable
 	 * @param x is given variable
-	 * @return the value of the polynomial for the given value of the variable
+	 * @return the value of the polynomial for the given value of the variable x
 	 */
 	public float evaluate(float x){
 		float result=0.0f;
-		for(int i=0;i<polyCofficients.length;i++){
-			float currValue = polyCofficients[i];
-			for(int j=0;j<i;j++)
-				currValue*=x;
-			result+=currValue;
+		for(int index=0;index<polynomialCofficients.length;index++){
+			float currentValue = polynomialCofficients[index];
+			for(int counter=0;counter<index;counter++)
+				currentValue*=x;
+			result+=currentValue;
 		}
 		return result;
 	}
@@ -34,67 +38,68 @@ public final class Poly {
 	 * @return the degree of the polynomial
 	 */
 	public int degree(){
-		return (polyCofficients.length-1);
+		return (polynomialCofficients.length-1);
 	}
 	
 	/**
-	 * Adding 2 polynomial
-	 * @param p1 is first polynomial
-	 * @param p2 is second polynomial
-	 * @return the sum of p1 and p2
+	 * Adding two polynomials
+	 * @param secondPolynomial is the second polynomial
+	 * @return the sum of this and secondPolynomial
 	 */
-	public static Poly addPoly(Poly p1, Poly p2){
-		int p1Len = p1.degree();
-		int p2Len = p2.degree();
-		System.out.println("p1Len "+p1Len);
-		System.out.println("p2Len "+p2Len);
-		int sum[] = new int[p1Len>p2Len?p1Len+1:p2Len+1];
-		System.out.println(sum.length);
-		for(int i=0;i<=p1Len;i++)
-			sum[i]=p1.polyCofficients[i];
-		for(int i=0;i<=p2Len;i++)
-			sum[i]+=p2.polyCofficients[i];
-		return new Poly(sum.length, sum);
+	public Poly addPoly(Poly secondPolynomial){
+		int lengthOfFirstPolynomial = this.degree();
+		int lengthOfSecondPolynomial = secondPolynomial.degree();
+		int lengthOfSum =0;
+
+		if(lengthOfFirstPolynomial>lengthOfSecondPolynomial)
+			lengthOfSum = lengthOfFirstPolynomial+1;
+		else
+			lengthOfSum=lengthOfSecondPolynomial+1;
+		int sum[] = new int[ lengthOfSum];
+		
+		for(int index=0;index<=lengthOfFirstPolynomial;index++)
+			sum[index]=this.polynomialCofficients[index];
+		for(int index=0;index<=lengthOfSecondPolynomial;index++)
+			sum[index]+=secondPolynomial.polynomialCofficients[index];
+		
+		Poly resultantPolynomial = new Poly(sum);
+		return resultantPolynomial;
 	}
 	
 	/**
-	 * @param p1 is first polynomial
-	 * @param p2 is second polynomial
-	 * @return the product of polynomials p1 and p2
+	 * Multiplication of two polynomials
+	 * @param secondPolynomial is the second polynomial
+	 * @return the product of polynomials this and secondPolynomial
 	 */
-	public static Poly multiplyPoly(Poly p1, Poly p2){
-		int mul[] = new int[p1.degree()+p2.degree()+1];
-		for(int i=0;i<=p1.degree();i++){
-			for(int j=0;j<=p2.degree();j++){
-				mul[i+j]=mul[i+j]+p1.polyCofficients[i]*p2.polyCofficients[j];
+	public Poly multiplyPoly(Poly secondPolynomial){
+		
+		int product[] = new int[this.degree()+secondPolynomial.degree()+1];
+		
+		for(int indexOfThis=0;indexOfThis<=this.degree();indexOfThis++){
+			for(int indexOfSecondPolynomial=0;indexOfSecondPolynomial<=secondPolynomial.degree();indexOfSecondPolynomial++){
+				product[indexOfThis + indexOfSecondPolynomial]+=this.polynomialCofficients[indexOfThis]*secondPolynomial.polynomialCofficients[indexOfSecondPolynomial];
 			}
 		}
-		return new Poly(mul.length, mul);
+		
+		Poly resultantMultiplication = new Poly(product);
+		return resultantMultiplication;
 	}
 
 	/**
-	 * To display the coffiecients of the polynomial
+	 * To display the coefficients of the polynomial
 	 */
 	public String toString(){
 		String result="";
-		for(int i=0;i<=this.degree();i++)
-			result+=this.polyCofficients[i]+" ";
+		for(int index=this.degree();index>=0;index--){
+			if(index==0)
+				result+=this.polynomialCofficients[index];
+			else
+				result+=this.polynomialCofficients[index]+"x^"+index+" + ";
+			
+		}
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		int poly[] = {1,2,3};
-		int poly2[] = {1,2,3,4};
-		Poly p1 = new Poly(poly.length, poly);
-		Poly p2 = new Poly(poly2.length, poly2);
-		System.out.println(p1);
-		System.out.println(p1.degree());
-		System.out.println(p2);
-		System.out.println(p2.degree());
-		Poly add = addPoly(p1, p2);
-		System.out.println(add);
-		Poly mul = multiplyPoly(p1, p2);
-		System.out.println(mul);
-	}
+	
 
 }

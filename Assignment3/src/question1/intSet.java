@@ -1,116 +1,110 @@
 package question1;
 
-public final class intSet {
+public final class IntSet {
+	
 	//array to represent a set of integers in the range 1-1000
 	private final int set[]=new int[1000];
-	private int setLength=0;
+	private int length=0;
 
 	/**
-	 * intSet Constructor
-	 * @param arr to initailize the set
+	 * IntSet Constructor
+	 * @param arr to initialize the set
 	 */
-	public intSet(int arr[]) {
-		for(int i=0;i<arr.length;i++){
-			if(!isMember(arr[i]))
-				set[setLength++]=arr[i];
+	public IntSet(int set[], int length) {
+		for(int index=0;index<length;index++){
+			if(!this.isMember(set[index]))
+				this.set[this.length++]=set[index];
 		}
 	}
 	
 	/**
-	 * check whether x is member of set
+	 * Check whether x is member of set
 	 * @param x value to check for
-	 * @return boolean value if set[i]==x
+	 * @return boolean value if set[index]==x
 	 */
 	public boolean isMember(int x) {
-		for(int i=0;i<setLength;i++){
-			if(this.set[i]==x) return true;
+		boolean flag = false;
+		for(int index=0;index<this.length;index++){
+			if(this.set[index]==x){
+				flag=true;
+				break;
+			}
 		}
-		return false;
+		return flag;
 	}
 	
 	/**
 	 * @return size of the set
 	 */
 	public int size() {
-		return setLength;
+		return this.length;
 	}
 	
 	/**
-	 * check whether s is subset of the set
+	 * Check whether s is subset of the set
 	 * @param s 
 	 * @return 
 	 */
-	public boolean isSubSet(intSet s) {
-		boolean flag = false;
-		for(int i=0;i<s.size();i++){
-			for(int j=0;j<setLength;j++){
-				if(s.set[i]==set[j]){
+	public boolean isSubSet(IntSet subset) {
+		boolean flag = true;
+		
+		for(int subsetIndex=0;subsetIndex<subset.size();subsetIndex++){
+			for(int setIndex=0;setIndex<this.length;setIndex++){
+				if(subset.set[subsetIndex]==this.set[setIndex]){
 					flag=true;
 					break;
 				}
-				else{
+				else
 					flag=false;
-				}
+				
 			}
 			if(!flag) 
-				return false;
+				break;
 		}
-		return true;
+		return flag;
 	}
 	
 	/**
 	 * @return  complement set, you can assume that 1..1000 is the universal set
 	 */
-	public intSet getComplement() {
-		int len=1000-this.setLength;
-		int complementArray[] = new int[len];
-		for(int i=1, index=0;i<=1000;i++){
-			if(!isMember(i))
-				complementArray[index++]+=i;
+	public IntSet getComplement() {
+		int lengthOfComplementArray=1000-this.length;
+		int complementArray[] = new int[lengthOfComplementArray];
+		
+		for(int counter=1, index=0;counter<=1000;counter++){
+			if(!this.isMember(counter))
+				complementArray[index++]+=counter;
 		}
-		return new intSet(complementArray);
+		
+		return new IntSet(complementArray, lengthOfComplementArray);
 	}
 	
 	/**
-	 * @param s1 intSet one
-	 * @param s2 intSet two
-	 * @return the union intSet of s1 and s2
+	 * @param firstSet is first IntSet
+	 * @param secondSet is second IntSet
+	 * @return the union intSet of firstSet and secondSet
 	 */
-	public static intSet union(intSet s1, intSet s2) {
-		int unionArray[] = new int[s1.size() + s2.size()];
-		for(int i=0;i<s1.size();i++){
-			unionArray[i]=s1.set[i];
+	public IntSet union(IntSet secondSet) {
+		IntSet firstSet = this;
+		int unionArrayLength = firstSet.size() + secondSet.size();
+		int unionArray[] = new int[unionArrayLength];
+		for(int index=0;index<firstSet.size();index++){
+			unionArray[index]=firstSet.set[index];
 		}
-		for(int i=0,index=s1.size();i<s2.size();i++){
-			if(!s1.isMember(s2.set[i]))
-				unionArray[index++]=s2.set[i];
+		for(int counter=0,index=firstSet.size();counter<secondSet.size();counter++){
+			if(!firstSet.isMember(secondSet.set[counter]))
+				unionArray[index++]=secondSet.set[counter];
 		}
-		return new intSet(unionArray);
+		return new IntSet(unionArray, unionArrayLength);
 	}
+	
 	
 	
 	public String toString(){
 		String result="";
-		for(int i=0;i<this.size();i++)
-			result+=this.set[i]+" ";
+		for(int index=0;index<this.size();index++)
+			result+=this.set[index]+" ";
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		int odd[] = {1,3,5,7,9};
-		int even[] = {2,4,6,8,10};
-		intSet oddSet = new intSet(odd);
-		intSet evenSet = new intSet(even);
-		System.out.println("size: "+oddSet.size());
-		System.out.println("isMemeber: "+ oddSet.isMember(6));
-		intSet compSet = oddSet.getComplement();
-		System.out.println(compSet);
-		System.out.println(compSet.isSubSet(oddSet));
-		intSet unionSet = union(evenSet, oddSet);
-		System.out.println();
-		for(int i=0;i<unionSet.size();i++)
-			System.out.print(unionSet.set[i]+" ");
-		
 	}
 	
 }
