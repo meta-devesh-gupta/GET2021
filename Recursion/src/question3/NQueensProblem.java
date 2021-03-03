@@ -50,30 +50,37 @@ public class NQueensProblem {
 	private boolean isSafePosition(int[][] board, int startRow, int column,
 			int dimensionOfMatrix) {
 
+		boolean flag = true;
 		// for all rows in column
 		for (int row = 0; row < startRow; row++) {
-			if (board[row][column] == 1)
-				return false;
+			if (board[row][column] == 1){
+				flag=false;
+				break;
+			}
 		}
 
-		// for upper diagonal
+		// for upper right diagonal
 		for (int row = startRow, col = column; (row >= 0 && col >= 0); row--, col--) {
-			if (board[row][col] == 1)
-				return false;
+			if (board[row][col] == 1){
+				flag=false;
+				break;
+			}
 		}
 
-		// for lower diagonal
-		for (int row = startRow, col = column; row < dimensionOfMatrix
-				&& col >= 0; row++, col--) {
-			if (board[row][col] == 1)
-				return false;
+		// for upper left diagonal
+		for (int row = startRow, col = column; (row >=0 )
+				&& (col < dimensionOfMatrix); row--, col++) {
+			if (board[row][col] == 1){
+				flag=false;
+				break;
+			}
 		}
 
-		return true;
+		return flag;
 	}
 
 	/**
-	 * Initialize the chess board with inital value 0
+	 * Initialize the chess board with initial value 0
 	 * 
 	 * @param board
 	 *            board is a 2D square matrix

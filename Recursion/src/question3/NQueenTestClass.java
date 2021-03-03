@@ -16,6 +16,13 @@ public class NQueenTestClass {
 		int expectedBoard[][] = { { 0, 1, 0, 0 }, { 0, 0, 0, 1 },
 				{ 1, 0, 0, 0 }, { 0, 0, 1, 0 }, };
 		assertArrayEquals(expectedBoard, board);
+		
+		dimensionOfMatrix = 3;
+		board = new int[dimensionOfMatrix][dimensionOfMatrix];
+		board=nQueensProblem.initializeWithZero(board, dimensionOfMatrix);
+		
+		assertFalse(nQueensProblem.nQueen(board, 0, dimensionOfMatrix));
+		
 	}
 
 }
