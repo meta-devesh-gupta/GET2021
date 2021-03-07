@@ -71,6 +71,8 @@ public class Screen {
 	 */
 	public boolean deleteShape(int index) {
 		// displaying shape and then deleting it
+		if(listOfShapes.isEmpty())
+			throw new AssertionError("List of shapes is empty");
 		if (index < 0 || index > listOfShapes.size())
 			return false;
 		Shape shape = listOfShapes.get(index);
