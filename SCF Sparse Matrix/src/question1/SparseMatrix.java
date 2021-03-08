@@ -310,7 +310,7 @@ public class SparseMatrix {
 		// values count in that matrix
 		multiplication[0][rowIndex] = this.nonZeroValues[0][columnIndex];
 		multiplication[0][columnIndex] = this.nonZeroValues[0][rowIndex];
-		multiplication[0][valueIndex] = this.nonZeroValues[0][valueIndex];
+		multiplication[0][valueIndex] = rowsOfMuliplicationMatrix;
 		return new SparseMatrix(multiplication, rowsOfMuliplicationMatrix);
 
 	}
