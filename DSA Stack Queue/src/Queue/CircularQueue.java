@@ -4,7 +4,7 @@ public class CircularQueue implements Queue<Integer> {
 
 	int queue[];
 	int front, rear;
-
+	int size;
 	/**
 	 * Initializing the queue with total number of elements
 	 * 
@@ -15,6 +15,7 @@ public class CircularQueue implements Queue<Integer> {
 		this.queue = new int[numberOfElements];
 		this.front = -1;
 		this.rear = -1;
+		this.size=0;
 	}
 
 	/**
@@ -31,11 +32,12 @@ public class CircularQueue implements Queue<Integer> {
 		else if (rear == -1) {
 			front = 0;
 			rear = 0;
+			queue[rear] = value;
 		} else {
 			rear = (rear + 1) % queue.length;
 			queue[rear] = value;
 		}
-
+		this.size++;
 		return true;
 	}
 
@@ -55,6 +57,7 @@ public class CircularQueue implements Queue<Integer> {
 			rear = -1;
 		} else
 			front = (front + 1) % queue.length;
+		this.size--;
 		return deletedItem;
 	}
 
@@ -82,4 +85,14 @@ public class CircularQueue implements Queue<Integer> {
 		return false;
 	}
 
+	/**
+	 * This method will return the size of the queue
+	 * @return size of the queue
+	 */
+	@Override
+	public int size() {
+		return size;
+	}
+
+	
 }

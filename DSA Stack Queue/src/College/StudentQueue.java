@@ -8,6 +8,7 @@ public class StudentQueue implements Queue<Student> {
 
 	Student queue[];
 	int front, rear;
+	int size;
 
 	/**
 	 * Initializing the queue with total number of elements
@@ -19,6 +20,7 @@ public class StudentQueue implements Queue<Student> {
 		this.queue = new Student[numberOfElements];
 		this.front = -1;
 		this.rear = -1;
+		this.size=0;
 	}
 
 	/**
@@ -35,9 +37,12 @@ public class StudentQueue implements Queue<Student> {
 		else if (rear == -1) {
 			front = 0;
 			rear = 0;
+			queue[rear] = value;
+			size++;
 		} else {
 			rear = (rear + 1) % queue.length;
 			queue[rear] = value;
+			size++;
 		}
 
 		return true;
@@ -59,6 +64,7 @@ public class StudentQueue implements Queue<Student> {
 			rear = -1;
 		} else
 			front = (front + 1) % queue.length;
+		size--;
 		return deletedItem;
 	}
 
@@ -86,6 +92,15 @@ public class StudentQueue implements Queue<Student> {
 		return false;
 	}
 
+	/**
+	 * This method will return the size of the queue
+	 * @return size of the queue
+	 */
+	@Override
+	public int size(){
+		return size;
+	}
+	
 	@Override
 	public String toString() {
 		return "StudentQueue [queue=" + Arrays.toString(queue) + ", front="

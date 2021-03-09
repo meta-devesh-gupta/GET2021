@@ -32,5 +32,11 @@ public interface Queue<T> {
 	 * @return true if queue is full else return false
 	 */
 	boolean isFull();
+	
+	/**
+	 * This method will return the size of the queue
+	 * @return size of the queue
+	 */
+	public int size();
 
 }
