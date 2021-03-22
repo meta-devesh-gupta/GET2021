@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <style>
+        .plan {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+            width: 50%;
+        }
+
+        .border {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="#employee">Add Employee</a>
+        &nbsp;
+        <a href="#vehicle">Add Vehicle</a>
+        &nbsp;
+        <a href="#feedback">Give Feedback</a>
+        &nbsp;
+        <a href="#pricing">Pricing</a>
+    </nav>
+    <main>
+        <section>
+            <img src="https://image.shutterstock.com/image-vector/parking-free-no-space-vector-260nw-660349345.jpg "
+                width="200px">
+        </section>
+        <section id="employee" class="border">
+            <br>
+            <form action="">
+                Full Name <input type="text" name="name" placeholder="Enter full name">
+                <br>
+                Gender
+                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="female"> Female
+                <br>
+                Email Id<input type="email" name="email" placeholder="Enter Email Id">
+                <br>
+                Password<input type="password" name="password" placeholder="Enter Password">
+                <br>
+                Confirm Password <input type="password" name="password" placeholder="Enter Password">
+                <br>
+                Contact Number <input type="text" name="contact" placeholder="Enter contact number">
+                <br>
+                <input type="submit" value="Add Employee">
+            </form>
+        </section>
+        <br>
+        <section id="vehicle">
+            <form action="" class="border">
+                Vehicle Brand <input type="text" name="vehicle-brand" placeholder="Enter vehicle brand">
+                <br>
+                Vehicle Model <input type="text" name="vehicle-model" placeholder="Enter vehicle model">
+                <br>
+                Type<input type="text" name="vehicle-type" placeholder="Enter type">
+                <br>
+                Vehicle Number<input type="number" name="vehicle-number" placeholder="Enter vehicle number">
+                <br>
+                Employee Id<input type="text" name="employee-id" placeholder="Enter employee id">
+                <br>
+                Identification<textarea name="identification" rows="5" cols="50"
+                    placeholder="Color, mark, visible accessory"></textarea>
+                <br>
+                <input type="submit" value="Add Vehicle">
+            </form>
+        </section>
+        <br>
+        <section id="pricing" class="border">
+            <form action="">
+                Full Name <input type="text" name="name" placeholder="Enter full name">
+                <br>
+                Email <input type="email" name="email" placeholder="Enter email">
+                <br>
+                Subject<input type="text" name="subject" placeholder="Enter subject">
+                <br>
+                Message<textarea name="message" rows="5" cols="50" placeholder="Enter Message"></textarea>
+                <br>
+                <input type="submit" value="Send Email">
+            </form>
+        </section>
+        <br>
+        <section id="pricing">
+            <h2>Pricing Plans</h2>
+            <div>
+                <div class="plan">
+                    <h3>CYCLE</h3>
+                    <h2>100$ / month</h2>
+                    <div>5$ Daily</div>
+                    <div>100$ Monthly</div>
+                    <div>500$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+                <div class="plan">
+                    <h3>MOTOR CYCLE</h3>
+                    <h2>200$ / month</h2>
+                    <div>10$ Daily</div>
+                    <div>200$ Monthly</div>
+                    <div>1000$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+                <div class="plan">
+                    <h3>FOUR WHEELERS</h3>
+                    <h2>500$ / month</h2>
+                    <div>20$ Daily</div>
+                    <div>500$ Monthly</div>
+                    <div>3500$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
