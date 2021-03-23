@@ -1,0 +1,133 @@
+*{
+    margin: 0px;
+}
+ul {
+    list-style-type: none;
+    margin: 5px 5px 0px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #109c7ef5;
+    border-radius: 10px;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111111;
+  }
+
+  .cover-img{
+      margin: 5px;
+      height: 475px;
+      width: 99%;
+      border: 1px solid #109c7ef5;
+  }
+
+  .plan {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid #000;
+    margin-left: 75px;
+    padding: 20px 100px;
+    border: 2px solid #109c7ef5;
+    border-radius: 10px;
+    
+}
+
+.heading{
+    display: block;
+    text-align: left;
+    margin: 15px 5px 0px;
+    padding: 14px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #109c7ef5;
+    font-size: 18px;
+    font-family:  Verdana, sans-serif;
+}
+
+form {
+    margin: 5px 5px 0px;
+    border: 2px solid #109c7ef5;
+    border-radius: 10px;
+    padding: 10px;
+}
+input{
+    color: #111;
+    padding: 7px;
+    margin: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 2px solid #109c7ef5;
+    border-radius: 10px;
+    outline: none;
+}
+input[type=text]
+    [type=email]
+    [type=password]
+    [type=number]{
+    text-align: left;
+}
+input[type=submit]{
+    background-color: #109c7ef5;
+    color: #fff;
+    
+}
+textarea{
+    border:2px solid #109c7ef5;
+    border-radius: 10px;
+    color: #111;
+    padding: 7px;
+    margin: 5px;
+    resize: none;
+} 
+
+.circular-border{
+    border: 2px solid #109c7ef5;
+    text-align: center;
+    margin: 10px;
+    padding: 25px;
+    border-radius: 50%;
+}
+
+h3{
+    color:#109c7ef5;
+}
+
+.collapsible {
+    border: none;
+    outline: none;
+    display: block;
+    text-align: left;
+    margin: 15px 5px 0px;
+    width: 99%;
+    padding: 14px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #109c7ef5;
+    font-size: 18px;
+    font-family:  Verdana, sans-serif;
+}
+
+.active, .collapsible:hover {
+  background-color: #3f7a6df5;
+}
+
+.content {
+  display: none;
+  overflow: hidden;
+}
+
+.left-align{
+    margin-left: 0px;
+}

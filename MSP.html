@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <link rel="stylesheet" href="CSS\style.css">
+</head>
+
+<body>
+    
+    <nav>
+        <ul>
+            <li><a href="#employee">Add Employee</a></li>
+            <li><a href="#vehicle">Add Vehicle</a></li>
+            <li><a href="#feedback">Give Feedback</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <img class="cover-img"
+                src="https://image.freepik.com/free-vector/parking-lot-cars-graphic_24877-60041.jpg ">
+        </section>
+
+
+        <section id="employee">
+            <button type="button" class="collapsible">Add Employee</button>
+            <div class="content">
+                <form action="">
+                    <h3>Employee Details-</h3>
+                    <table>
+                        <tr>
+                            <td>Full Name</td>
+                            <td><input type="text" name="name" placeholder="Enter full name" required></td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <div class="left-align">
+                                    <input type="radio" name="gender" value="male"> Male
+                                    <input type="radio" name="gender" value="female"> Female
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Email Id</td>
+                            <td><input type="email" name="email" placeholder="Enter Email Id" required></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password" placeholder="Enter Password" minlength="8"></td>
+                        </tr>
+                        <tr>
+                            <td>Confirm Password</td>
+                            <td><input type="password" name="password" placeholder="Enter Password Again" minlength="8"></td>
+                        </tr>
+                        <tr>
+                            <td>Contact Number</td>
+                            <td><input type="text" name="contact" placeholder="Enter contact number" minlength="10"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Add Employee">
+                </form>
+            </div>
+        </section>
+
+        <section id="vehicle">
+            <button type="button" class="collapsible">Add Vehicle</button>
+            <div class="content">
+                <form action="">
+                    <h3>Vehicle Details-</h3>
+                    <table>
+                        <tr>
+                            <td>Vehicle Brand</td>
+                            <td><input type="text" name="vehicle-brand" placeholder="Enter vehicle brand"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Vehicle Model</td>
+                            <td><input type="text" name="vehicle-model" placeholder="Enter vehicle model"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Type</td>
+                            <td><input type="text" name="vehicle-type" placeholder="Enter type"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Vehicle Number</td>
+                            <td><input type="number" name="vehicle-number" placeholder="Enter vehicle number"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Employee Id</td>
+                            <td><input type="text" name="employee-id" placeholder="Enter employee id"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Identification</td>
+                            <td>
+                                <textarea name="identification" rows="3" cols="35"
+                                    placeholder="Color, mark, visible accessory"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Add Vehicle">
+                </form>
+            </div>
+        </section>
+
+        <section id="feedback">
+            <div class="heading">Get in touch</div>
+            <form action="">
+                <table>
+                    <tr>
+                        <td><input type="text" name="name" placeholder="Enter full name"></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="email" name="email" placeholder="Enter email" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="subject" placeholder="Enter subject"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <textarea name="message" rows="5" cols="47" placeholder="Enter Message"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Send Email">
+            </form>
+        </section>
+
+        <section id="pricing">
+            <h2 class="heading">Pricing Plans</h2>
+            <br>
+            <div>
+                <div class="plan">
+                    <h3>CYCLE</h3>
+                    <div class="circular-border">
+                        <h2>100$</h2>
+                        <div>/month</div>
+                    </div>
+                    <div>5$ Daily</div>
+                    <div>100$ Monthly</div>
+                    <div>500$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+                <div class="plan">
+                    <h3>MOTOR CYCLE</h3>
+                    <div class="circular-border">
+                        <h2>200$</h2>
+                        <div>/month</div>
+                    </div>
+                    <div>10$ Daily</div>
+                    <div>200$ Monthly</div>
+                    <div>1000$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+                <div class="plan">
+                    <h3>FOUR WHEELERS</h3>
+                    <div class="circular-border">
+                        <h2>500$</h2>
+                        <div>/month</div>
+                    </div>
+                    <div>20$ Daily</div>
+                    <div>500$ Monthly</div>
+                    <div>3500$ Yearly</div>
+                    <input type="submit" value="Purchase Now">
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="Script\script.js"></script>
+
+</html>
