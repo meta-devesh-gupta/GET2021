@@ -1,3 +1,4 @@
+//This function show one field at a time of vehicle section
 function vehicleDetails(event) {
     var parentElement = event.target.parentElement;
     var nextSibling = parentElement.nextElementSibling;
@@ -6,34 +7,34 @@ function vehicleDetails(event) {
     switch (event.target.id) {
         case "vc-name":
             document.getElementById("vc-input-label").innerHTML = "What is your vehicle type ";
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
 
         case "cycle":
             document.getElementById("vc-input-label").innerHTML = "What is your vehicle number ";
             parentElement = parentElement.parentElement;
             nextSibling = parentElement.nextElementSibling;
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
 
         case "motercycle":
             document.getElementById("vc-input-label").innerHTML = "What is your vehicle number ";
             parentElement = parentElement.parentElement;
             nextSibling = parentElement.nextElementSibling;
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
 
         case "fourwheeler":
             document.getElementById("vc-input-label").innerHTML = "What is your vehicle number ";
             parentElement = parentElement.parentElement;
             nextSibling = parentElement.nextElementSibling;
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
 
         case "vc-number":
             if (validateVehicleNumber(event.target.value)) {
                 document.getElementById("vc-input-label").innerHTML = "What is your employee id? ";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 errorMessage.push("Enter complete number of vechicle ex: RJ02-CA-1234");
@@ -44,7 +45,7 @@ function vehicleDetails(event) {
         case "emp-id":
             if (validateEmpId(event.target.value)) {
                 document.getElementById("vc-input-label").innerHTML = "What are the identification marks of your vehicle? To submit text click outside the box";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 event.target.style = "border: 2px solid red";
@@ -71,16 +72,22 @@ function vehicleDetails(event) {
     if (errorMessage.length == 0)
         document.getElementById("vc-error-element").classList.add("display-none");
 }
+
+//This function is to collapse vehicle form
 function getPass() {
     var vcType = getRadioButtonValue(document.getElementsByName("vehicle-type"));
     console.log("vcType: "+vcType);
     document.getElementById("vehicle-form").classList.add("display-none");
     displayPlan();
 }
+
+//This function will validate employee id
 function validateEmpId(employeeId) {
     var regex = /^([a-zA-Z0-9\/]{1,})$/;
     return regex.test(employeeId);
 }
+
+//This function is to validate vehicle number
 function validateVehicleNumber(number) {
     var regex = /^([a-zA-Z0-9-]{12,12})$/;
     return regex.test(number);

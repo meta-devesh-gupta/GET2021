@@ -14,11 +14,13 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-function setMessage(parentElement, nextSibling) {
+//This method hides current field and display next field
+function showNextField(parentElement, nextSibling) {
     parentElement.classList.add("display-none");
     nextSibling.classList.remove("display-none");
 }
 
+//This method gets the value for the radio button
 function getRadioButtonValue(radio) {
     var index = 0;
     for (index = 0; index < radio.length; index++) {

@@ -1,3 +1,4 @@
+//This function is to display selected vehicle plan
 function displayPlan() {
     document.getElementById("pricing").classList.remove("display-none");
     var cyclePricePlan = {
@@ -46,6 +47,8 @@ function displayPlan() {
     document.getElementById("monthly-price").innerHTML = selectedVehiclePlan["monthly"] + currencySymbol;
     document.getElementById("yearly-price").innerHTML = selectedVehiclePlan["yearly"] + currencySymbol;
 }
+
+//This function fetch the selected currency
 function getCurrency() {
     var currency = document.getElementsByName("currency")[0].children;
     var selectedCurrency, index;
@@ -55,6 +58,8 @@ function getCurrency() {
     }
     return selectedCurrency;
 }
+
+//This function converts the currency of the selected vehicle plan from usd to yen
 function usdToYen(selectedVehiclePlan) {
     var yenBaseValue = 110;
     console.log(selectedVehiclePlan);

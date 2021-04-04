@@ -1,3 +1,4 @@
+//This function will show one field at a time of employee section
 function empDetails(event) {
     var parentElement = event.target.parentElement;
     var nextSibling = parentElement.nextElementSibling;
@@ -8,7 +9,7 @@ function empDetails(event) {
             if (validateName(event.target.value)) {
                 var name = event.target.value;
                 document.getElementById("input-label").innerHTML = "Hi " + name + "! Can I know your gender?";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 errorMessage.push("Invalid name...Length min 2 and should not be numeric");
@@ -19,18 +20,18 @@ function empDetails(event) {
             document.getElementById("input-label").innerHTML = "Can I know your email? ";
             parentElement = parentElement.parentElement;
             nextSibling = parentElement.nextElementSibling;
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
         case "female":
             document.getElementById("input-label").innerHTML = "Can I know your email? ";
             parentElement = parentElement.parentElement;
             nextSibling = parentElement.nextElementSibling;
-            setMessage(parentElement, nextSibling);
+            showNextField(parentElement, nextSibling);
             break;
         case "email":
             if (validateEmail(event.target.value)) {
                 document.getElementById("input-label").innerHTML = "Please enter your password ";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 errorMessage.push("Invalid email...should contain @ .");
@@ -40,7 +41,7 @@ function empDetails(event) {
         case "password":
             if (validatePassword(event.target.value)) {
                 document.getElementById("input-label").innerHTML = "Please confirm your password ";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 errorMessage.push("Incorrect Password...should contains Uppercase, Lowercase, Numeric, Alphanumeric, and length minimum 8");
@@ -50,7 +51,7 @@ function empDetails(event) {
         case "confirm-pass":
             if (validateConfirmPassword(event.target.value)) {
                 document.getElementById("input-label").innerHTML = "Please enter your contact number ";
-                setMessage(parentElement, nextSibling);
+                showNextField(parentElement, nextSibling);
             }
             else {
                 errorMessage.push("Password mismatch");
@@ -79,39 +80,54 @@ function empDetails(event) {
     if (errorMessage.length == 0)
         document.getElementById("error-element").classList.add("display-none");
 }
+
+//This function will collapse the employee form
+function submitEmpForm() {
+    document.getElementById("employee-form").classList.add("display-none");
+    getRegisterationId();
+}
+
+//This function will generate the registeration id of the employee
 function getRegisterationId() {
     // document.getElementById("employee-form").submit();
     registrationId = "Registeration Id: " + Math.floor(Math.random() * 10000) + 1;
     document.getElementById("addEmpButton").innerText = registrationId;
     return registrationId;
 }
-function submitEmpForm() {
-    document.getElementById("employee-form").classList.add("display-none");
-    getRegisterationId();
-}
+
+//This function will validate the name of the employee
 function validateName(name) {
     name = name.trim();
     var regex = /^([a-zA-Z ]{2,})$/;
     return regex.test(name);
 }
+
+//This function will validate the email of the employee
 function validateEmail(email) {
     email = email.trim();
     var regex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9-]+)\.([a-z]{2,})$/;
     return regex.test(email);
 }
+
+//This function will validate the password of the employee
 function validatePassword(password) {
     var regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return regex.test(password);
 }
+
+//This function is to validate the confirm password
 function validateConfirmPassword(confirmPassword) {
     var password = document.getElementById("password").value;
     return (password == confirmPassword);
 }
+
+//This function is to validate contact number of the employee
 function validateContactNumber(number) {
     var regex = /^([0-9]{8,})$/;
     return regex.test(number);
 }
 
+//This function change the border color according to password strength
 function passwordValidation(event) {
     var passwordField = event.target.value;
     if (!validatePassword(passwordField)) {
