@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#employee">Add Employee</a></li>
+                <li><a href="#vehicle">Add Vehicle</a></li>
+                <li><a href="#feedback">Give Feedback</a></li>
+                <!-- <li><a href="#pricing">Pricing</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Main body -->
+    <main>
+        <section>
+            <img class="cover-img"
+                src="Images/parking-lot-cars-graphic_24877-60041.jpg">
+        </section>
+
+        <!-- Add employee section -->
+        <section id="employee">
+            <button type="button" class="collapsible text-center" id="addEmpButton">Add Employee</button>
+            <div class="content">
+                <form action="" id="employee-form">
+                    <h3>Employee Details-</h3>
+                    <div id="input-label-div">
+                        <label for="name" id="input-label">Full Name</label>
+                    </div>
+                    <div id="ename-row" class="input-tag">
+                        <input type="text" id="name" name="name" placeholder="Enter full name" onchange="empDetails(event)"
+                            required>
+                    </div>
+                    <div class="display-none input-tag" id="gender-row">
+                        <div class="left-align">
+                            <input type="radio" name="gender" id="male" value="male" onchange="empDetails(event)"> <label
+                                for="male">Male</label>
+                            <input type="radio" name="gender" id="female" value="female" onchange="empDetails(event)">
+                            <label for="female">Female</label>
+                        </div>
+                    </div>
+    
+                    <div class="display-none input-tag" id="email-row">
+                        <input type="email" id="email" name="email" placeholder="Enter Email Id"
+                            onchange="empDetails(event)" required>
+                    </div>
+                    <div class="display-none input-tag" id="password-row">
+                        <input type="password" id="password" name="password" placeholder="Enter Password"
+                            onchange="empDetails(event)" oninput="passwordValidation(event)">
+                    </div>
+                    <div class="display-none input-tag" id="confirm-pass-row">
+                        <input type="password" id="confirm-pass" name="password" placeholder="Enter Password Again"
+                            onchange="empDetails(event)" oninput="passwordValidation(event)">
+                    </div>
+                    <div class="display-none input-tag" id="enumber-row">
+                        <input type="text" id="number" name="contact" placeholder="Enter contact number"
+                            onchange="empDetails(event)">
+                    </div>
+                    <div id="registration-id input-tag">
+                        <input type="button" id="submitbutton" class="display-none" value="Get Registeration Id"
+                            onclick="submitEmpForm()">
+                    </div>
+                    <div id="error-element" class="display-none"></div>
+    
+                </form>
+            </div>
+        </section>
+
+        <!-- Add vehicle section -->
+        <section id="vehicle">
+            <button type="button" class="collapsible text-center">Add Vehicle</button>
+            <div class="content">
+                <form action="" id="vehicle-form">
+                    <h3>Vehicle Details-</h3>
+                    <div id="vc-input-label-div">
+                        <label for="name" id="vc-input-label">Enter Vehicle Name</label>
+                    </div>
+                    <div>
+                        <input type="text" id="vc-name" name="vehicle-name" placeholder="Enter vehicle name"
+                            onchange="vehicleDetails(event)" required>
+                    </div>
+    
+                    <!-- Type -->
+                    <div class="display-none input-tag" id="vc-type-row">
+                        <div class="left-align">
+                            <input type="radio" name="vehicle-type" id="cycle" value="cycle"
+                                onchange="vehicleDetails(event)">
+                            <label for="cycle">Cycle</label>
+                            <input type="radio" name="vehicle-type" id="motercycle" value="motercycle"
+                                onchange="vehicleDetails(event)">
+                            <label for="motercycle">Motercycle</label>
+                            <input type="radio" name="vehicle-type" id="fourwheeler" value="fourwheeler"
+                                onchange="vehicleDetails(event)">
+                            <label for="fourwheeler">Four Wheelers</label>
+                        </div>
+                    </div>
+    
+    
+                    <div class="display-none">
+                        <!-- Vehicle Number -->
+                        <input type="text" id="vc-number" name="vc-number" placeholder="Enter vehicle number"
+                            onchange="vehicleDetails(event)" required>
+                    </div>
+    
+                    <div class="display-none">
+                        <!-- Employee Id -->
+                        <input type="text" id="emp-id" name="emp-id" placeholder="Enter employee id"
+                            onchange="vehicleDetails(event)" required>
+                    </div>
+    
+                    <div class="display-none">
+                        <!-- Identification -->
+                        <textarea name="identification" id="id-textarea" rows="3" cols="35"
+                            placeholder="Color, mark, visible accessory" onchange="vehicleDetails(event)"></textarea>
+    
+                    </div>
+                    <div id="add-vc-div input-tag">
+                        <input type="button" id="add-vc" class="display-none" value="Get Pass" onclick="getPass()">
+                    </div>
+                    <div id="vc-error-element" class="display-none"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Vehicle Plan section -->
+        <section id="pricing" class="display-none">
+            <h2 class="heading text-center" id="vechicle-title">Pricing Plans</h2>
+            <br>
+            <div class="text-center padding-x">
+                <h3>Select Your Pass</h3>
+                <label for="currency">Select currency</label>
+                <select name="currency" id="currency" onchange="displayPlan()">
+                    <option value="usd" selected>USD</option>
+                    <option value="yen">YEN</option>
+                </select>
+            </div>
+            <div class="container">
+                <div class="plan">
+                    <h3>Daily Plan</h3>
+                    <div class="circular-border">
+                        <h2 id="daily-price"></h2>
+                        <div>/daily</div>
+                    </div>
+                    <input type="button" value="Purchase Daily Pass">
+                </div>
+                <div class="plan">
+                    <h3>Monthly Plan</h3>
+                    <div class="circular-border">
+                        <h2 id="monthly-price"></h2>
+                        <div>/month</div>
+                    </div>
+                    <input type="button" value="Purchase Monthly Pass">
+                </div>
+                <div class="plan">
+                    <h3>Yearly Plan</h3>
+                    <div class="circular-border">
+                        <h2 id="yearly-price"></h2>
+                        <div>/year</div>
+                    </div>
+                    <input type="button" value="Purchase Yearly Pass">
+                </div>
+            </div>
+    
+        </section>
+    
+        <!-- Feedback section -->
+        <section id="feedback">
+            <div class="heading">Get in touch</div>
+            <form action="">
+                <table>
+                    <tr>
+                        <td><input type="text" name="name" placeholder="Enter full name"></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="email" name="email" placeholder="Enter email" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="subject" placeholder="Enter subject"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <textarea name="message" rows="5" cols="47" placeholder="Enter Message"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Send Email">
+            </form>
+        </section>
+    </main>
+</body>
+<script src="JS/script.js"></script>
+<script src="JS/Employee.js"></script>
+<script src="JS/Vehicle.js"></script>
+<script src="JS/PricePlan.js"></script>
+
+</html>
